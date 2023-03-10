@@ -27,3 +27,6 @@ var/
 
 .aws-sam
 tests
+
+**/.DS_Store/*
+.DS_Store

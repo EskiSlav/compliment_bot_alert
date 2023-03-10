@@ -17,6 +17,7 @@ class DynamoDB:
 
     def __init__(self) -> None:
         self.dynamodb = boto3.resource('dynamodb', region_name='eu-west-2')
+        logger.info('DynamoDB is initialized')
 
     def get_all_users(self):
         table = self.dynamodb.Table(DynamoDB.USERS_TABLE)

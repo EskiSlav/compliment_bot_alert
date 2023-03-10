@@ -10,8 +10,7 @@ from tg.bot import Bot
 from tg.models import User
 logger = logging.getLogger(__name__)
 
-openai.api_key = get_ssm_parameter_value('/config/bot/openai_api_token')
-bot = Bot()
+bot = Bot(get_ssm_parameter_value('/config/bot/api_token'))
 db = DynamoDB()
 
 
@@ -28,6 +27,8 @@ def generate_compliment():
 
 def send_compliments():
     logger.debug('Starting sending compliments')
+    openai_api = get_ssm_parameter_value('/config/bot/openai_api_token')
+    openai.api_key = openai_api
 
     users = db.get_all_users()
 

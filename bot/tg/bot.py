@@ -3,19 +3,16 @@ from __future__ import annotations
 import logging
 
 import requests
-from aws.ssm import get_ssm_parameter_value
 
 logger = logging.getLogger(__name__)
 
 
 class Bot:
-    def __init__(self, token=None) -> None:
-        if token is None:
-            token = get_ssm_parameter_value('/config/bot/api_token')
-
+    def __init__(self, token) -> None:
         self.token = token
         self.session = requests.Session()
         self.request_string = f'https://api.telegram.org/bot{self.token}/'
+        logger.info('Bot is initialized')
 
     def send_message(self, chat_id: int, text: str, parse_mode: str = 'MarkdownV2'):
         url = self.request_string + 'sendMessage'
