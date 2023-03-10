@@ -19,13 +19,15 @@ class Bot:
         json_data = {
             'chat_id': chat_id,
             'text': text,
-            'parse_mode': parse_mode,
+            # 'parse_mode': parse_mode,
         }
-
+        print(f'{json_data=}')
         logger.debug(f'Sending message: {json_data=}')
         response = self.session.post(url=url, json=json_data)
         logger.info(f'Sent message to {chat_id}')
         logger.debug(f'{response.status_code=}')
         logger.debug(f'{response.text=}')
-
+        print(response)
+        print(f'{response.status_code=}')
+        print(f'{response.text=}')
         return response.status_code
